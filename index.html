@@ -4,6 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ANU Ai 세미나</title>
+
+  <meta name="description" content="ANU AI 세미나 홈페이지" />
+  <meta property="og:title" content="ANU Ai 세미나" />
+  <meta property="og:description" content="ANU AI 세미나 홈페이지" />
+  <meta property="og:url" content="https://tsst-create.github.io/" />
+
   <style>
     * {
       box-sizing: border-box;
@@ -155,6 +161,27 @@
       color: #22262d;
     }
 
+    .download-wrap {
+      margin-top: 28px;
+    }
+
+    .download-btn {
+      display: inline-block;
+      background: #111318;
+      color: #ffffff;
+      text-decoration: none;
+      padding: 14px 20px;
+      border-radius: 14px;
+      font-size: 15px;
+      font-weight: 600;
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .download-btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
     .hidden {
       display: none;
     }
@@ -228,7 +255,7 @@
           <div class="card-top"><span>04</span><span>→</span></div>
           <div>
             <h2>프로그램 분석</h2>
-            <p>Gemieni</p>
+            <p>Gemini</p>
           </div>
         </div>
 
@@ -252,6 +279,12 @@
         <h1 id="detailTitle" class="detail-title">주제 1</h1>
         <p id="detailSubtitle" class="detail-subtitle">첫 번째 주제 설명</p>
         <div id="detailContent" class="detail-content"></div>
+
+        <div id="downloadWrap" class="download-wrap hidden">
+          <a id="downloadBtn" class="download-btn" href="#" download>
+            Practice1 PDF 다운로드
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -261,32 +294,44 @@
       {
         label: "Topic 1",
         title: "법규검토",
-        subtitle: "Note book LM",
-        content: `AI를 활용한 법규검토 방법\n\n문단을 나누어 작성하면 더 보기 좋습니다.\n\n원하시는 만큼 길게 작성할 수 있습니다.`
+        subtitle: "NotebookLM",
+        content: `AI를 활용한 법규검토 방법
+
+Practice1 PDF 파일을 아래 버튼으로 다운로드할 수 있습니다.`,
+        fileUrl: "Practice1.pdf",
+        fileName: "Practice1.pdf"
       },
       {
         label: "Topic 2",
-        title: "주제 2",
-        subtitle: "두 번째 주제에 대한 간단한 설명",
-        content: `여기에 두 번째 주제의 본문을 넣어주세요.\n\n설명, 스토리, 소개 글 등 원하는 형식으로 입력할 수 있습니다.`
+        title: "사이트 분석",
+        subtitle: "Gemini",
+        content: `여기에 두 번째 주제의 본문을 넣어주세요.
+
+설명, 스토리, 소개 글 등 원하는 형식으로 입력할 수 있습니다.`
       },
       {
         label: "Topic 3",
-        title: "주제 3",
-        subtitle: "세 번째 주제에 대한 간단한 설명",
-        content: `여기에 세 번째 주제의 본문을 넣어주세요.\n\n중요한 문장은 따로 정리해도 좋습니다.`
+        title: "매스 다이어그램",
+        subtitle: "Gemini",
+        content: `여기에 세 번째 주제의 본문을 넣어주세요.
+
+중요한 문장은 따로 정리해도 좋습니다.`
       },
       {
         label: "Topic 4",
-        title: "주제 4",
-        subtitle: "네 번째 주제에 대한 간단한 설명",
-        content: `여기에 네 번째 주제의 본문을 넣어주세요.\n\n홈페이지 성격에 맞게 자유롭게 수정하시면 됩니다.`
+        title: "프로그램 분석",
+        subtitle: "Gemini",
+        content: `여기에 네 번째 주제의 본문을 넣어주세요.
+
+홈페이지 성격에 맞게 자유롭게 수정하시면 됩니다.`
       },
       {
         label: "Topic 5",
-        title: "주제 5",
-        subtitle: "다섯 번째 주제에 대한 간단한 설명",
-        content: `여기에 다섯 번째 주제의 본문을 넣어주세요.\n\n마무리 문장이나 강조 문구를 넣어도 좋습니다.`
+        title: "이미지 판넬 생성",
+        subtitle: "Gemini",
+        content: `여기에 다섯 번째 주제의 본문을 넣어주세요.
+
+마무리 문장이나 강조 문구를 넣어도 좋습니다.`
       }
     ];
 
@@ -296,6 +341,19 @@
       document.getElementById("detailTitle").textContent = topic.title;
       document.getElementById("detailSubtitle").textContent = topic.subtitle;
       document.getElementById("detailContent").textContent = topic.content;
+
+      const downloadWrap = document.getElementById("downloadWrap");
+      const downloadBtn = document.getElementById("downloadBtn");
+
+      if (topic.fileUrl) {
+        downloadBtn.href = topic.fileUrl;
+        downloadBtn.setAttribute("download", topic.fileName || "download.pdf");
+        downloadBtn.textContent = "Practice1 PDF 다운로드";
+        downloadWrap.classList.remove("hidden");
+      } else {
+        downloadWrap.classList.add("hidden");
+        downloadBtn.removeAttribute("href");
+      }
 
       document.getElementById("homePage").classList.add("hidden");
       document.getElementById("detailPage").classList.remove("hidden");
