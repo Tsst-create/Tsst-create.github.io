@@ -151,7 +151,7 @@
     .detail-subtitle {
       font-size: 18px;
       color: #5a6270;
-      margin-bottom: 32px;
+      margin-bottom: 24px;
     }
 
     .detail-content {
@@ -159,6 +159,29 @@
       font-size: 17px;
       line-height: 1.95;
       color: #22262d;
+    }
+
+    .site-link-wrap {
+      margin-top: 24px;
+    }
+
+    .site-link-label {
+      font-size: 14px;
+      color: #5a6270;
+      margin-bottom: 8px;
+    }
+
+    .site-link {
+      display: inline-block;
+      color: #2b5cff;
+      text-decoration: none;
+      font-size: 16px;
+      font-weight: 600;
+      word-break: break-all;
+    }
+
+    .site-link:hover {
+      text-decoration: underline;
     }
 
     .download-wrap {
@@ -280,6 +303,11 @@
         <p id="detailSubtitle" class="detail-subtitle">첫 번째 주제 설명</p>
         <div id="detailContent" class="detail-content"></div>
 
+        <div id="siteLinkWrap" class="site-link-wrap hidden">
+          <div class="site-link-label">NotebookLM 홈페이지</div>
+          <a id="siteLink" class="site-link" href="#" target="_blank" rel="noopener noreferrer"></a>
+        </div>
+
         <div id="downloadWrap" class="download-wrap hidden">
           <a id="downloadBtn" class="download-btn" href="#" download>
             Practice1 PDF 다운로드
@@ -295,9 +323,8 @@
         label: "Topic 1",
         title: "법규검토",
         subtitle: "NotebookLM",
-        content: `AI를 활용한 법규검토 방법
-
-Practice1 PDF 파일을 아래 버튼으로 다운로드할 수 있습니다.`,
+        content: `AI를 활용한 법규검토 방법`,
+        siteUrl: "https://notebooklm.google.com/",
         fileUrl: "Practice1.pdf",
         fileName: "Practice1.pdf"
       },
@@ -341,6 +368,19 @@ Practice1 PDF 파일을 아래 버튼으로 다운로드할 수 있습니다.`,
       document.getElementById("detailTitle").textContent = topic.title;
       document.getElementById("detailSubtitle").textContent = topic.subtitle;
       document.getElementById("detailContent").textContent = topic.content;
+
+      const siteLinkWrap = document.getElementById("siteLinkWrap");
+      const siteLink = document.getElementById("siteLink");
+
+      if (topic.siteUrl) {
+        siteLink.href = topic.siteUrl;
+        siteLink.textContent = topic.siteUrl;
+        siteLinkWrap.classList.remove("hidden");
+      } else {
+        siteLinkWrap.classList.add("hidden");
+        siteLink.removeAttribute("href");
+        siteLink.textContent = "";
+      }
 
       const downloadWrap = document.getElementById("downloadWrap");
       const downloadBtn = document.getElementById("downloadBtn");
